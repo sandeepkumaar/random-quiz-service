@@ -9,6 +9,8 @@ import { contextProvider, proxyWithContext } from "./async-context.js";
 global.log = proxyWithContext(logger, "log");
 const log = global.log;
 
+import quizRouter from './quiz/index.js';
+
 const app = express();
 
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -32,6 +34,8 @@ app.get("/version", function (req, res, next) {
     name: "sandeep",
   });
 });
+
+app.use('/questions', quizRouter);
 
 /**
  * @type {import('express').ErrorRequestHandler}
